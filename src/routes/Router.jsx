@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CatalogPage from "../pages/Catalog/CatalogPage";
-import ProductPage from "../pages/Product/ProductPage";
-import CheckoutPage from "../pages/Checkout/CheckoutPage";
-import PaymentStatusPage from "../pages/Payment/PaymentStatusPage";
+import CatalogPage from "../pages/catalog/CatalogPage";
+import ProductPage from "../pages/product/ProductPage";
+import CheckoutPage from "../pages/checkout/CheckoutPage";
+import PaymentStatusPage from "../pages/payment/PaymentStatusPage";
 import LoginPage from "../pages/login/LoginPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 
