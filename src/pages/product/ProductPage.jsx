@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import products from "../../data/products";
 import { useApp } from "../../context/AppProvider";
+import { useStore } from "../../context/StoreProvider";
 import AmountInput from "../../components/AmountInput";
 import UserMenu from "../../components/UserMenu";
 import "./ProductPage.css";
@@ -9,6 +10,7 @@ export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { product, amount, setAmount } = useApp();
+  const { storeSlug } = useStore();
 
   const selected = product ?? products.find(p => p.id === id);
 
@@ -19,7 +21,7 @@ export default function ProductPage() {
         <div className="page-container">
           <div className="page-card">
             <p className="error-message">Product not found</p>
-            <button className="btn-secondary" onClick={() => navigate("/")}>
+            <button className="btn-secondary" onClick={() => navigate(`/${storeSlug}/catalog`)}>
               Back to Store
             </button>
           </div>
@@ -33,11 +35,11 @@ export default function ProductPage() {
       alert("Please enter a valid amount");
       return;
     }
-    navigate("/checkout");
+    navigate(`/${storeSlug}/checkout`);
   };
 
   const handleBack = () => {
-    navigate("/");
+    navigate(`/${storeSlug}/catalog`);
   };
 
   return (

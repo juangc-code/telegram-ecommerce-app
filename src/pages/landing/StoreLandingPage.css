@@ -1,0 +1,138 @@
+.landing-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.landing-card {
+  max-width: 700px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.store-hero {
+  margin-bottom: 3rem;
+}
+
+.store-logo {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 2rem;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.store-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.store-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.store-description {
+  font-size: 1.125rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.landing-actions {
+  margin: 2.5rem 0;
+}
+
+.btn-catalog {
+  font-size: 1.125rem;
+  padding: 1rem 3rem;
+  min-width: 250px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-catalog:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-catalog:active {
+  transform: translateY(0);
+}
+
+.store-info {
+  padding: 1rem 0;
+  border-top: 1px solid #e0e0e0;
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.store-info:first-of-type {
+  margin-top: 2rem;
+}
+
+.store-info-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.store-info-value {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.loading-container,
+.error-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-message {
+  color: var(--danger-color);
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .landing-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .store-name {
+    font-size: 2rem;
+  }
+
+  .store-description {
+    font-size: 1rem;
+  }
+
+  .btn-catalog {
+    padding: 0.875rem 2rem;
+    min-width: 200px;
+    font-size: 1rem;
+  }
+
+  .store-logo {
+    width: 100px;
+    height: 100px;
+  }
+}

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppProvider";
+import { useStore } from "../../context/StoreProvider";
 import UserMenu from "../../components/UserMenu";
 import "./PaymentStatusPage.css";
 
 export default function PaymentStatusPage() {
   const navigate = useNavigate();
   const { txResult } = useApp();
+  const { storeSlug } = useStore();
   const [copied, setCopied] = useState(false);
 
   if (!txResult) {
@@ -16,7 +18,7 @@ export default function PaymentStatusPage() {
         <div className="page-container">
           <div className="page-card">
             <p className="error-message">No payment found</p>
-            <button className="btn-secondary" onClick={() => navigate("/")}>
+            <button className="btn-secondary" onClick={() => navigate(`/${storeSlug}/catalog`)}>
               Back to Store
             </button>
           </div>
@@ -36,7 +38,7 @@ export default function PaymentStatusPage() {
   };
 
   const handleBackToStore = () => {
-    navigate("/");
+    navigate(`/${storeSlug}/catalog`);
   };
 
   const isSuccess = txResult.result === "SUCCESS" || txResult.result === 0;

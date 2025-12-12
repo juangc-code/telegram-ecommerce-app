@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppProvider";
+import { useStore } from "../../context/StoreProvider";
 import { lemonAuth, lemonDeposit } from "../../services/LemonService";
 import { convertToCrypto } from "../../services/ConversionService";
 import UserMenu from "../../components/UserMenu";
@@ -9,6 +10,7 @@ import "./CheckoutPage.css";
 export default function CheckoutPage() {
   const navigate = useNavigate();
   const { product, amount, setTxResult } = useApp();
+  const { storeSlug } = useStore();
   const [isProcessing, setIsProcessing] = useState(false);
 
   if (!product) {
@@ -18,7 +20,7 @@ export default function CheckoutPage() {
         <div className="page-container">
           <div className="page-card">
             <p className="error-message">No product selected</p>
-            <button className="btn-secondary" onClick={() => navigate("/")}>
+            <button className="btn-secondary" onClick={() => navigate(`/${storeSlug}/catalog`)}>
               Back to Store
             </button>
           </div>
@@ -35,7 +37,7 @@ export default function CheckoutPage() {
       const result = await lemonDeposit(cryptoAmount);
 
       setTxResult(result);
-      navigate("/status");
+      navigate(`/${storeSlug}/status`);
     } catch (error) {
       console.error("Payment failed:", error);
       alert("Payment failed. Please try again.");
@@ -44,7 +46,7 @@ export default function CheckoutPage() {
   };
 
   const handleBack = () => {
-    navigate(`/product/${product.id}`);
+    navigate(`/${storeSlug}/product/${product.id}`);
   };
 
   const totalAmount = product.requiresAmount ? amount : product.price;
