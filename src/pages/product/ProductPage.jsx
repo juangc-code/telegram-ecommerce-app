@@ -30,10 +30,20 @@ export default function ProductPage() {
     );
   }
 
+  const isVariablePrice = selected.productType === 'VARIABLE_PRICE' || selected.requiresAmount;
+  const minPrice = selected.minPrice || 0;
+
   const handleContinue = () => {
-    if (selected.requiresAmount && (!amount || Number(amount) <= 0)) {
-      alert("Please enter a valid amount");
-      return;
+    if (isVariablePrice) {
+      const amountValue = Number(amount);
+      if (!amount || amountValue <= 0) {
+        alert("Please enter a valid amount");
+        return;
+      }
+      if (minPrice > 0 && amountValue < minPrice) {
+        alert(`Minimum amount is ${selected.currencyCode || 'ARS'} ${minPrice}`);
+        return;
+      }
     }
     navigate(`/${storeSlug}/checkout`);
   };
@@ -53,16 +63,27 @@ export default function ProductPage() {
           </div>
 
           <div className="product-details">
-            {typeof selected.price !== 'undefined' && !selected.requiresAmount && (
+            {typeof selected.price !== 'undefined' && !isVariablePrice && (
               <div className="detail-row">
                 <span className="detail-label">Price:</span>
-                <span className="detail-value">${selected.price}</span>
+                <span className="detail-value">{selected.currencyCode || 'ARS'} {selected.price}</span>
               </div>
             )}
 
-            {selected.requiresAmount && (
+            {isVariablePrice && (
               <div className="amount-section">
-                <AmountInput value={amount} onChange={setAmount} />
+                <AmountInput
+                  value={amount}
+                  onChange={setAmount}
+                  min={minPrice}
+                  placeholder={selected.suggestedPrice ? `Suggested: ${selected.suggestedPrice}` : '$'}
+                />
+                {minPrice > 0 && (
+                  <p className="price-hint">Minimum: {selected.currencyCode || 'ARS'} {minPrice}</p>
+                )}
+                {selected.suggestedPrice && (
+                  <p className="price-hint">Suggested: {selected.currencyCode || 'ARS'} {selected.suggestedPrice}</p>
+                )}
               </div>
             )}
           </div>

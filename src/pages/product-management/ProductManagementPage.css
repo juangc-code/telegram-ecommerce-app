@@ -1,0 +1,221 @@
+.product-management {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.management-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.management-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.btn-create {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-create:hover {
+  background-color: #218838;
+}
+
+.products-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table thead {
+  background-color: #f8f9fa;
+}
+
+.products-table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.products-table td {
+  padding: 16px;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 14px;
+  color: #666;
+}
+
+.products-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.products-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.product-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-thumbnail {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.product-type {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.inactive {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-edit {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #bd2130;
+}
+
+.empty-state {
+  padding: 48px 24px;
+  text-align: center;
+  color: #666;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.error-message {
+  color: #dc3545;
+  padding: 16px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+.access-denied-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.access-denied-content {
+  text-align: center;
+  padding: 48px 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+}
+
+.access-denied-content h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #dc3545;
+  margin: 0 0 16px 0;
+}
+
+.access-denied-content p {
+  font-size: 16px;
+  color: #666;
+  margin: 8px 0;
+}
+
+.access-denied-hint {
+  font-size: 14px;
+  color: #999;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .management-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .products-table-container {
+    overflow-x: auto;
+  }
+
+  .products-table {
+    min-width: 800px;
+  }
+}

@@ -39,12 +39,18 @@ export default function ProductCard({ product, onSelect }) {
             {product.description && <div className="product-description">{product.description}</div>}
           </div>
 
-          {typeof product.price !== 'undefined' && (
-            <div className="product-price-container">
-              <div className="product-price">${product.price}</div>
-              {product.requiresAmount && <div className="product-custom">Custom amount</div>}
-            </div>
-          )}
+          <div className="product-price-container">
+            {product.productType === 'VARIABLE_PRICE' || product.requiresAmount ? (
+              <>
+                <div className="product-price">Choose your price</div>
+                {product.suggestedPrice && (
+                  <div className="product-custom">Suggested: {product.currencyCode || 'ARS'} {product.suggestedPrice}</div>
+                )}
+              </>
+            ) : typeof product.price !== 'undefined' ? (
+              <div className="product-price">{product.currencyCode || 'ARS'} {product.price}</div>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

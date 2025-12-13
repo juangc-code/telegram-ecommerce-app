@@ -49,7 +49,8 @@ export default function CheckoutPage() {
     navigate(`/${storeSlug}/product/${product.id}`);
   };
 
-  const totalAmount = product.requiresAmount ? amount : product.price;
+  const isVariablePrice = product.productType === 'VARIABLE_PRICE' || product.requiresAmount;
+  const totalAmount = isVariablePrice ? amount : product.price;
 
   return (
     <>
@@ -79,12 +80,12 @@ export default function CheckoutPage() {
 
               <div className="summary-row">
                 <span className="summary-label">Amount:</span>
-                <span className="summary-value">${totalAmount}</span>
+                <span className="summary-value">{product.currencyCode || 'ARS'} {totalAmount}</span>
               </div>
 
               <div className="summary-total">
                 <span className="total-label">Total:</span>
-                <span className="total-value">${totalAmount} ARS</span>
+                <span className="total-value">{product.currencyCode || 'ARS'} {totalAmount}</span>
               </div>
             </div>
           </div>

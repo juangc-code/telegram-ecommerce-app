@@ -5,6 +5,7 @@ import CheckoutPage from "../pages/checkout/CheckoutPage";
 import PaymentStatusPage from "../pages/payment/PaymentStatusPage";
 import LoginPage from "../pages/login/LoginPage";
 import StoreLandingPage from "../pages/landing/StoreLandingPage";
+import ProductManagementPage from "../pages/product-management/ProductManagementPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import { StoreProvider } from "../context/StoreProvider";
 import { ProductProvider } from "../context/ProductProvider";
@@ -26,6 +27,16 @@ export default function Router() {
                   <CatalogPage />
                 </ProtectedRoute>
               </ProductProvider>
+            </StoreProvider>
+          }
+        />
+        <Route
+          path="/:storeSlug/manage-products"
+          element={
+            <StoreProvider>
+              <ProtectedRoute>
+                <ProductManagementPage />
+              </ProtectedRoute>
             </StoreProvider>
           }
         />

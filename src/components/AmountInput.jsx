@@ -30,7 +30,7 @@ export default function AmountInput({ value = '', onChange, placeholder = '$', m
           id="amount-input"
           type="text"
           inputMode="decimal"
-          // value={value}
+          value={value}
           onChange={handleChange}
           placeholder={placeholder}
           className="amount-input"
