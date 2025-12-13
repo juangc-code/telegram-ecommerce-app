@@ -1,5 +1,4 @@
 import { useParams, useNavigate } from "react-router-dom";
-import products from "../../data/products";
 import { useApp } from "../../context/AppProvider";
 import { useStore } from "../../context/StoreProvider";
 import AmountInput from "../../components/AmountInput";
@@ -12,9 +11,7 @@ export default function ProductPage() {
   const { product, amount, setAmount } = useApp();
   const { storeSlug } = useStore();
 
-  const selected = product ?? products.find(p => p.id === id);
-
-  if (!selected) {
+  if (!product) {
     return (
       <>
         <UserMenu />
