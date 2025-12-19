@@ -10,11 +10,51 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import { StoreProvider } from "../context/StoreProvider";
 import { ProductProvider } from "../context/ProductProvider";
 
+import AdminLoginPage from "../pages/admin/login/AdminLoginPage";
+import AdminDashboard from "../pages/admin/dashboard/AdminDashboard";
+import TenantsPage from "../pages/admin/tenants/TenantsPage";
+import UsersPage from "../pages/admin/users/UsersPage";
+import AdminProtectedRoute from "../components/AdminProtectedRoute";
+import AdminLayout from "../components/AdminLayout";
+
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+
+        {/* Admin routes */}
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout>
+                <AdminDashboard />
+              </AdminLayout>
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/tenants"
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout>
+                <TenantsPage />
+              </AdminLayout>
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout>
+                <UsersPage />
+              </AdminLayout>
+            </AdminProtectedRoute>
+          }
+        />
 
         {/* Store-specific routes with dynamic slug */}
         <Route path="/:storeSlug" element={<StoreProvider><StoreLandingPage /></StoreProvider>} />
