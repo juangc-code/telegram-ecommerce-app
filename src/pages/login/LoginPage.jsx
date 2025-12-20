@@ -33,7 +33,7 @@ export default function LoginPage() {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1>Payment Manager</h1>
+        <h1>Welcome</h1>
         <h2>Login</h2>
 
         <form onSubmit={handleSubmit} className="login-form">
@@ -67,10 +67,6 @@ export default function LoginPage() {
             Login
           </button>
         </form>
-
-        <p className="login-info">
-          For demo purposes, enter any username and password to login.
-        </p>
       </div>
     </div>
   );
