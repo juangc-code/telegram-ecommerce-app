@@ -5,7 +5,7 @@ import './StoreLandingPage.css';
 
 const StoreLandingPage = () => {
   const navigate = useNavigate();
-  localStorage.setItem('tma', useRawInitData);
+  localStorage.setItem('tma', useRawInitData());
   const { store, isLoading, error, storeSlug } = useStore();
   localStorage.setItem('store', storeSlug);  
 
