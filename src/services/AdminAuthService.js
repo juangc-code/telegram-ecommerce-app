@@ -5,12 +5,12 @@ class AdminAuthService {
     const response = await adminApi.post('/auth/admin/login', { userName, password });
 
     if (response.data.token) {
-      localStorage.setItem('adminToken', response.data.token);
-      localStorage.setItem('adminUser', JSON.stringify(response.data.user));
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
 
       // Store token expiration time if provided by backend
       if (response.data.expiresAt) {
-        localStorage.setItem('adminTokenExpiry', response.data.expiresAt);
+        localStorage.setItem('tokenExpiry', response.data.expiresAt);
       }
     }
 
@@ -22,17 +22,17 @@ class AdminAuthService {
   }
 
   logout() {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminUser');
-    localStorage.removeItem('adminTokenExpiry');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('tokenExpiry');
   }
 
   getStoredToken() {
-    return localStorage.getItem('adminToken');
+    return localStorage.getItem('token');
   }
 
   getStoredUser() {
-    const user = localStorage.getItem('adminUser');
+    const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
 
@@ -41,7 +41,7 @@ class AdminAuthService {
     if (!token) return false;
 
     // Check if token is expired
-    const expiry = localStorage.getItem('adminTokenExpiry');
+    const expiry = localStorage.getItem('tokenExpiry');
     if (expiry) {
       const now = new Date().getTime();
       const expiryTime = new Date(expiry).getTime();
@@ -55,7 +55,7 @@ class AdminAuthService {
   }
 
   isTokenExpired() {
-    const expiry = localStorage.getItem('adminTokenExpiry');
+    const expiry = localStorage.getItem('tokenExpiry');
     if (!expiry) return false;
 
     const now = new Date().getTime();
