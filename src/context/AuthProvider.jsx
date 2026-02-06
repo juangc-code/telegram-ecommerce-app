@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (loginRequest) => {
     try {
-      const response = await AuthService.login(loginRequest);
-      if (response.data.user) {
-        setUser(response.data.user);
+      const data = await AuthService.login(loginRequest);
+      if (data.user) {
+        setUser(data.user);
       }
-      return response;
+      return data;
     } catch (error) {
       console.error("Login failed:", error);
       throw error;
@@ -40,12 +40,12 @@ export const AuthProvider = ({ children }) => {
 
   const getCurrentUser = async () => {
     try {
-      const response = await AuthService.getCurrentUser();
-      if (response.data) {
-        setUser(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data));
+      const data = await AuthService.getCurrentUser();
+      if (data) {
+        setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
       }
-      return response;
+      return data;
     } catch (error) {
       console.error("Failed to get current user:", error);
       throw error;

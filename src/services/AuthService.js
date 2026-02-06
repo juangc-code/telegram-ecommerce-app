@@ -2,14 +2,17 @@ import api from './api';
 
 class AuthService {
   async login(loginRequest) {
-    const response = await api.post('/auth/login', loginRequest);
+    console.log('Login request: ' + loginRequest)
+    const data = await api.post('/auth/web/login', loginRequest);
 
-    if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+    console.log('Response: ' + JSON.stringify(data));
+
+    if (data.token) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
     }
 
-    return response;
+    return data;
   }
 
   async getCurrentUser() {

@@ -20,7 +20,7 @@ export const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      if (!store?.data?.id) {
+      if (!store?.id) {
         setIsLoading(false);
         return;
       }
@@ -30,12 +30,12 @@ export const ProductProvider = ({ children }) => {
 
       try {
         const productsData = await ProductService.getActiveProductsByStoreId(
-          store.data.id,
+          store.id,
           0,
           100
         );
 
-        const productsList = productsData?.data?.content || [];
+        const productsList = productsData?.content || [];
         setProducts(productsList);
       } catch (err) {
         console.error('Error fetching products:', err);
@@ -47,7 +47,7 @@ export const ProductProvider = ({ children }) => {
     };
 
     fetchProducts();
-  }, [store?.data?.id]);
+  }, [store?.id]);
 
   const value = {
     products,

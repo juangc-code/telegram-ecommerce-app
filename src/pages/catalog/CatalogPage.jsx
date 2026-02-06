@@ -24,7 +24,7 @@ export default function CatalogPage() {
         <div className="page-container">
           <div className="page-card catalog-card">
             <div className="page-header">
-              <h1 className="page-title">{store?.data?.name || 'Loading...'}</h1>
+              <h1 className="page-title">{store?.name || 'Loading...'}</h1>
               <p className="page-subtitle">Loading products...</p>
             </div>
           </div>
@@ -40,7 +40,7 @@ export default function CatalogPage() {
         <div className="page-container">
           <div className="page-card catalog-card">
             <div className="page-header">
-              <h1 className="page-title">{store?.data?.name}</h1>
+              <h1 className="page-title">{store?.name}</h1>
               <p className="page-subtitle error">Error: {error}</p>
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function CatalogPage() {
       <div className="page-container">
         <div className="page-card catalog-card">
           <div className="page-header">
-            <h1 className="page-title">{store?.data?.name || 'Catalog'}</h1>
+            <h1 className="page-title">{store?.name || 'Catalog'}</h1>
             <p className="page-subtitle">Select a product or service</p>
           </div>
 

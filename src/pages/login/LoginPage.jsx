@@ -21,13 +21,14 @@ export default function LoginPage() {
       setError("Please enter both username and password");
       return;
     }
-
-    const success = login(username, password);
-    if (success) {
-      navigate(from, { replace: true });
-    } else {
-      setError("Invalid credentials");
-    }
+    
+    login({ userName: username, password })
+      .then(() => {
+        navigate(from, { replace: true });
+      })
+      .catch(() => {
+        setError("Invalid credentials");
+      });
   };
 
   return (

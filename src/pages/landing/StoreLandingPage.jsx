@@ -58,14 +58,14 @@ const StoreLandingPage = () => {
     <div className="page-container landing-container">
       <div className="page-card landing-card">
         <div className="store-hero">
-          {store.data.logoUrl && (
+          {store.logoUrl && (
             <div className="store-logo">
-              <img src={store.data.logoUrl} alt={`${store.data.name} logo`} />
+              <img src={store.logoUrl} alt={`${store.name} logo`} />
             </div>
           )}
-          <h1 className="store-name">{store.data.name}</h1>
+          <h1 className="store-name">{store.name}</h1>
           {store.description && (
-            <p className="store-description">{store.data.description}</p>
+            <p className="store-description">{store.description}</p>
           )}
         </div>
 
@@ -78,17 +78,17 @@ const StoreLandingPage = () => {
           </button>
         </div>
 
-        {store.data.businessAddress && (
+        {store.businessAddress && (
           <div className="store-info">
             <p className="store-info-label">Location</p>
             <p className="store-info-value">{store.businessAddress}</p>
           </div>
         )}
 
-        {store.data.contactEmail && (
+        {store.contactEmail && (
           <div className="store-info">
             <p className="store-info-label">Contact</p>
-            <p className="store-info-value">{store.data.contactEmail}</p>
+            <p className="store-info-value">{store.contactEmail}</p>
           </div>
         )}
       </div>

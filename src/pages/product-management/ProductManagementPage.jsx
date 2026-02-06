@@ -15,17 +15,17 @@ export default function ProductManagementPage() {
   const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
-    if (store?.data?.id) {
+    if (store?.id) {
       fetchProducts();
     }
-  }, [store?.data?.id]);
+  }, [store?.id]);
 
   const fetchProducts = async () => {
     try {
       setIsLoading(true);
       setAccessDenied(false);
-      const response = await ProductService.getProductsByStoreId(store.data.id, 0, 100);
-      setProducts(response?.data?.content || []);
+      const response = await ProductService.getProductsByStoreId(store.id, 0, 100);
+      setProducts(response?.content || []);
       setError(null);
     } catch (err) {
       console.error('Error fetching products:', err);
@@ -152,7 +152,7 @@ export default function ProductManagementPage() {
           {showForm ? (
             <ProductForm
               product={editingProduct}
-              storeId={store?.data?.id}
+              storeId={store?.id}
               onSubmit={handleSubmit}
               onCancel={handleCancel}
             />

@@ -15,16 +15,15 @@ api.interceptors.request.use(
     const tma = localStorage.getItem('tma');
     const storeSlug = localStorage.getItem('store');
     if (storeSlug) {
-      config.headers.set('store', storeSlug);
+      config.headers['store'] = storeSlug;
     }
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      return config;
-    }
-    if (tma) {
+    } else if (tma) {
       config.headers.Authorization = `tma ${tma}`;
-      return config;
     }
+    
+    return config;
   },
   (error) => {
     return Promise.reject(error);
@@ -33,7 +32,8 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (response) => {
-    return response.data;
+    // Unwrap both Axios response.data and API wrapper { success, data, timestamp }
+    return response.data?.data || response.data;
   },
   (error) => {
     if (error.response?.status === 401) {

@@ -11,7 +11,7 @@ const adminApi = axios.create({
 
 adminApi.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -29,9 +29,9 @@ adminApi.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       // Token expired or invalid
-      localStorage.removeItem('adminToken');
-      localStorage.removeItem('adminUser');
-      localStorage.removeItem('adminTokenExpiry');
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('tokenExpiry');
       window.location.href = '/admin/login';
     }
     return Promise.reject(error);
