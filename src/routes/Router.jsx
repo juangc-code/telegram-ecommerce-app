@@ -5,6 +5,7 @@ import CheckoutPage from "../pages/checkout/CheckoutPage";
 import PaymentStatusPage from "../pages/payment/PaymentStatusPage";
 import LoginPage from "../pages/login/LoginPage";
 import StoreLandingPage from "../pages/landing/StoreLandingPage";
+import SubscribedStoresPage from "../pages/subscribed-stores/SubscribedStoresPage";
 import ProductManagementPage from "../pages/product-management/ProductManagementPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import { StoreProvider } from "../context/StoreProvider";
@@ -21,6 +22,7 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<ProtectedRoute><SubscribedStoresPage /></ProtectedRoute>} />
         <Route path="/login" element={<LoginPage />} />
 
         {/* Admin routes */}
