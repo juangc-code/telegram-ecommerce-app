@@ -1,25 +1,9 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../../context/StoreProvider';
-import { useRawInitData } from '@tma.js/sdk-react';
 import './StoreLandingPage.css';
 
 const StoreLandingPage = () => {
-  function useIsTelegram() {
-  const [isTelegram, setIsTelegram] = useState(false);
-
-  useEffect(() => {
-    setIsTelegram(!!window.Telegram?.WebApp);
-  }, []);
-
-  return isTelegram;
-}
-
   const navigate = useNavigate();
-  if (useIsTelegram()) {
-    localStorage.setItem('tma', useRawInitData());
-  }
-
   const { store, isLoading, error, storeSlug } = useStore();
   localStorage.setItem('store', storeSlug);  
 
