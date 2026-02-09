@@ -14,15 +14,25 @@ api.interceptors.request.use(
     const token = localStorage.getItem('token');
     const tma = localStorage.getItem('tma');
     const storeSlug = localStorage.getItem('store');
+
+    console.log('API Request Interceptor:');
+    console.log('- Token present:', !!token);
+    console.log('- TMA present:', !!tma);
+    console.log('- Store:', storeSlug);
+
     if (storeSlug) {
       config.headers['store'] = storeSlug;
     }
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log('- Using Bearer token auth');
     } else if (tma) {
       config.headers.Authorization = `tma ${tma}`;
+      console.log('- Using TMA auth');
+    } else {
+      console.log('- No auth header set');
     }
-    
+
     return config;
   },
   (error) => {
