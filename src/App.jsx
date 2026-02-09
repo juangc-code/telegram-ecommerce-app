@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Router from "./routes/Router";
 import { AppProvider } from "./context/AppProvider";
 import { AuthProvider } from "./context/AuthProvider";
-import { useRawInitData } from '@tma.js/sdk-react';
+import { retrieveRawInitData } from '@tma.js/sdk';
 
 export default function App() {
   const [isTelegram, setIsTelegram] = useState(false);
@@ -12,31 +12,27 @@ export default function App() {
     const isInTelegram = !!window.Telegram?.WebApp;
     setIsTelegram(isInTelegram);
 
-    if (!isInTelegram) {
+    if (isInTelegram) {
+      // Retrieve and refresh TMA initData
+      try {
+        const rawInitData = retrieveRawInitData();
+        if (rawInitData) {
+          // Clear old TMA data first
+          localStorage.removeItem('tma');
+          // Set fresh TMA data
+          localStorage.setItem('tma', rawInitData);
+          console.log('TMA initData refreshed:', rawInitData.substring(0, 50) + '...');
+        }
+      } catch (error) {
+        console.log('Could not retrieve TMA initData:', error.message);
+        localStorage.removeItem('tma');
+      }
+    } else {
       // Clear any stale TMA data when opened in browser
       localStorage.removeItem('tma');
+      console.log('Running in browser, TMA auth disabled');
     }
   }, []);
-
-  // Only call useRawInitData hook if we're in Telegram environment
-  const rawInitData = isTelegram ? useRawInitData() : null;
-
-  useEffect(() => {
-    // Only handle TMA data if we're in Telegram environment
-    if (isTelegram) {
-      if (rawInitData) {
-        // Clear old TMA data first
-        localStorage.removeItem('tma');
-        // Set fresh TMA data
-        localStorage.setItem('tma', rawInitData);
-        console.log('TMA initData refreshed:', rawInitData.substring(0, 50) + '...');
-      } else {
-        // If no rawInitData available, clear stale data
-        localStorage.removeItem('tma');
-        console.log('No TMA initData available, cleared stale data');
-      }
-    }
-  }, [isTelegram, rawInitData]);
 
   return (
     <AuthProvider>
