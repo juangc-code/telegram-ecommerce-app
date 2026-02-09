@@ -1,30 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Router from "./routes/Router";
 import { AppProvider } from "./context/AppProvider";
 import { AuthProvider } from "./context/AuthProvider";
-import { retrieveRawInitData } from '@tma.js/sdk';
 
 export default function App() {
-  const [isTelegram, setIsTelegram] = useState(false);
-
   useEffect(() => {
     // Check if running inside Telegram
     const isInTelegram = !!window.Telegram?.WebApp;
-    setIsTelegram(isInTelegram);
+    console.log('Is Telegram:', isInTelegram);
 
     if (isInTelegram) {
       // Retrieve and refresh TMA initData
       try {
-        const rawInitData = retrieveRawInitData();
-        if (rawInitData) {
-          // Clear old TMA data first
-          localStorage.removeItem('tma');
-          // Set fresh TMA data
-          localStorage.setItem('tma', rawInitData);
-          console.log('TMA initData refreshed:', rawInitData.substring(0, 50) + '...');
-        }
+        // Import and use the function dynamically
+        import('@tma.js/sdk').then(({ retrieveRawInitData }) => {
+          try {
+            const rawInitData = retrieveRawInitData();
+            console.log('Raw initData retrieved:', !!rawInitData);
+            if (rawInitData) {
+              // Clear old TMA data first
+              localStorage.removeItem('tma');
+              // Set fresh TMA data
+              localStorage.setItem('tma', rawInitData);
+              console.log('TMA initData stored in localStorage');
+              console.log('TMA preview:', rawInitData.substring(0, 50) + '...');
+              // Verify it was stored
+              const stored = localStorage.getItem('tma');
+              console.log('TMA verified in storage:', !!stored);
+            } else {
+              console.log('No rawInitData returned');
+            }
+          } catch (innerError) {
+            console.error('Error retrieving TMA initData:', innerError);
+            localStorage.removeItem('tma');
+          }
+        }).catch(err => {
+          console.error('Error importing @tma.js/sdk:', err);
+        });
       } catch (error) {
-        console.log('Could not retrieve TMA initData:', error.message);
+        console.error('Could not retrieve TMA initData:', error);
         localStorage.removeItem('tma');
       }
     } else {
